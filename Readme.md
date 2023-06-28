@@ -1,7 +1,3 @@
-# [Download](https://github.com/avdosev/curriculum_vitae/releases/latest/download/resume.pdf) my resume
+### [Download](https://github.com/Naymoll/resume/releases/latest/download/resume.pdf)
 
-## Local build
-    cd src
-    pdflatex main.tex
-
-## [CV Template](https://github.com/fizixmastr/CV-Resume)
+### [Template](https://www.overleaf.com/latex/templates/rezume/kfrvqywfkwjs)

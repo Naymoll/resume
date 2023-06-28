@@ -1,239 +1,277 @@
-  %------------------------------------------------------------------------------
-% CV in Latex
-% Author : Nikita Avdosev
-% Based off of: https://github.com/sb2nov/resume and Jake's Resume on Overleaf
-%------------------------------------------------------------------------------
+%-------------------------
+% Rezume, a latex resume template for developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
 
-\documentclass[A4,11pt]{article}
-%\documentclass[letterpaper,11pt]{article} %For use in US
-\usepackage{latexsym}
-\usepackage[empty]{fullpage}
-\usepackage{titlesec}
-\usepackage{marvosym}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage[english]{babel}
-\usepackage{tabularx}
-\usepackage{tikz}
-\input{glyphtounicode}
+% Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
+%-------------------------
 
-%-----FONT OPTIONS-------------------------------------------------------------
 
-% serif
- \usepackage{palatino}
-% \usepackage{times} %This is the default as well
-% \usepackage{charter}
 
-% sans-serif
-% \usepackage{helvet}
-% \usepackage[sfdefault]{noto-sans}
-% \usepackage[default]{sourcesanspro}
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
 
-%-----PAGE SETUP---------------------------------------------------------------
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
 
-% Adjust margins
-\addtolength{\oddsidemargin}{-1cm}
-\addtolength{\evensidemargin}{-1cm}
-\addtolength{\textwidth}{2cm}
-\addtolength{\topmargin}{-1cm}
-\addtolength{\textheight}{2cm}
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
 
-% Margins for US Letter size
-%\addtolength{\oddsidemargin}{-0.5in}
-%\addtolength{\evensidemargin}{-0.5in}
-%\addtolength{\textwidth}{1in}
-%\addtolength{\topmargin}{-.5in}
-%\addtolength{\textheight}{1.0in}
+\usepackage{color} % provides both foreground and background color management
 
-\urlstyle{same}
+\usepackage{enumitem} % provides control over enumerate, itemize and description
 
-\raggedbottom
-\raggedright
-\setlength{\tabcolsep}{0cm}
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
 
-% Sections formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
 
-% Ensure that .pdf is machine readable/ATS parsable
-\pdfgentounicode=1
+\usepackage{latexsym} % provides mathematical symbols
 
-%-----CUSTOM COMMANDS FOR FORMATTING SECTIONS----------------------------------
-\newcommand{\CVItem}[1]{
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{sourcesanspro} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+% \titleformat{<command>}
+%   [<shape>]{<format>}{<label>}{<sep>}
+%     {<before-code>}[<after-code>]
+
+% command is the sectioning command to be redefined
+% shape is the style of the font; scshape stands for small caps style
+% format is the format to be applied to whole title- label and text; absent here
+% label defines the label
+% sep is the horizontal separation between label and title body
+% before-code is the code to be executed before
+% after-code is the code to be executed after
+
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{black}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.16\linewidth}p{0.02\linewidth}p{0.55\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
   \item\small{
-    {#1 \vspace{-2pt}}
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
   }
 }
 
-\newcommand{\CVSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \small#3 & \small #4 \\
-    \end{tabular*}\vspace{-7pt}
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
 }
 
-\newcommand{\CVSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}
-      \text{#1} \text{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
 }
 
-\newcommand{\GithubProjectDescription}[3]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.5\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \emph{\small{#1}} 
-      $|$
-      {\href{#2}{\includegraphics[scale=.3]{images/GitHub-Mark-32px.png}}} 
-      $|$ 
-      #3
-    \end{tabular*}\vspace{-7pt}
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
 }
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
 
 
-\newcommand{\CVSubItem}[1]{\CVItem{#1}\vspace{-4pt}}
-
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\CVSubHeadingListStart}{\begin{itemize}[leftmargin=0.5cm, label={}]}
-% \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]} % Uncomment for US
-\newcommand{\CVSubHeadingListEnd}{\end{itemize}}
-\newcommand{\CVItemListStart}{\begin{itemize}}
-\newcommand{\CVItemListEnd}{\end{itemize}\vspace{-5pt}}
-
-%------------------------------------------------------------------------------
-% CV STARTS HERE  %
-%------------------------------------------------------------------------------
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
 \begin{document}
 
-%-----HEADING------------------------------------------------------------------
+%-----------CONTACT DETAILS------------------
+% Make sure all the details are correct, you can add more links in the first row of second column if needed
+
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge Sokolov Maksim \vspace{2pt}} & % row = 1, col = 1
+  Location: Saint-Petersburg, Russia \\ % row = 1, col = 2
+  \href{https://vk.com/naymoll}{\uline{VK}} $|$ % row = 2, col = 1
+  \href{https://t.me/real_naymoll}{\uline{Telegram}} $|$ % row = 2, col = 1
+  \href{https://github.com/Naymoll}{\uline{GitHub}} & % row = 2, col = 1
+  Email: \href{mailto:naymoll@yandex.ru}{\uline{naymoll@yandex.ru}} $|$ % row = 2, col = 2
+  Mobile: +7 (923) 314-02-80 \\ % row = 2, col = 2
+\end{tabular*}
+%--------------------------------------------
 
 
-\begin{center}
-   \textbf{\Huge \scshape Avdosev Nikita} \\ \vspace{1pt} %\scshape sets small capital letters, remove if desired
-   \small +7 917-727-9031 $|$ 
-   \href{mailto:avdosev1@yandex.ru}{\underline{avdosev1@yandex.ru}} $|$ 
-   VK/Telegram @avdosev \\
-   % Be sure to use a professional *personal* email address
-   \href{https://github.com/avdosev}{\underline{Github}} $|$
-   \href{https://www.linkedin.com/in/avdosev/}{\underline{LinkedIn}} $|$
-   \href{https://habr.com/ru/users/avdosev/}{\underline{Habr}}
-\end{center}
+%-----------SUMMARY--------------------------
+% Keep this short, simple and straigth to point
 
-%-----EDUCATION----------------------------------------------------------------
+\section{About Me}
+\small{I'm a backend developer with good computer science skills. I have hands-on experience building reliable services and a passion for working at the intersection of backend development and machine learning}
+%--------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+% Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+\section{Experience}
+\resumeHeadingListStart{}
+    \resumeQuadHeading{Go Developer}{February 2023 -- Present}
+    {Solution Factory}{Remote}
+    \resumeItemListStart{}
+        \resumeItem{Development and maintaining of a sales system for standalone vending machines}
+        \resumeItem{Developed a user verification library via cell phone}
+        \resumeItem{Created a service for management of sales documents}
+        \resumeItem{Designed and implemented a Server-Driven UI service based on DivKit}
+        \resumeItem{Optimizing a sales system for standalone vending machines}
+    \resumeItemListEnd{}
+
+    \resumeQuadHeading{Rust Developer}{August 2021 -- November 2022}
+    {Atlas Delivery}{Remote}
+    \resumeItemListStart{}
+        \resumeItem{Developed and maintained of vehicle routing problem solving service}
+        \resumeItem{Designed and developed a utility to collect public transportation information from Open Street Map}
+        \resumeItem{Developed a Rust library based on top of the C++ OSRM library}
+        \resumeItem{Optimized microservices performance with PGO}
+    \resumeItemListEnd{}
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+% Mention your CGPA, if its good, in the first row of second column
+
 \section{Education}
-  \CVSubHeadingListStart
-%    \CVSubheading % Example
-%      {Degree Achieved}{Years of Study}
-%      {Institution of Study}{Where it is located}
+  \resumeHeadingListStart{}
+    \resumeQuadHeading{ITMO University}{Saint Petersburg, Russia}
+    {Master of Software Engieering}{September 2021 -- June 2023}
 
-    \CVSubheading
-      {{Master of Software Engieering }}{Sep. 2021 -- July 2023}
-      {ITMO University}{Saint Petersburg, Russia}
-    \CVSubheading
-      {{Bachelor of Computer Science }}{Sep. 2017 -- July 2021}
-      {Volgograd State Technical University}{Volgograd, Russia}
+    \resumeQuadHeading{Siberian Federal University}{Krasnoyarsk, Russia}
+    {Bachelor of Computer Science}{September 2017 -- June 2021}
+  \resumeHeadingListEnd{}
+%---------------------------------------------
 
 
-  \CVSubHeadingListEnd
-
-%-----WORK EXPERIENCE----------------------------------------------------------
-
-\section{Work Experience}
-  \CVSubHeadingListStart
-%    \CVSubheading %Example
-%      {What you did}{When you worked there}
-%      {Who you worked for}{Where they are located}
-%      \CVItemListStart
-%        \CVItem{Why it is important to this employer}
-%      \CVItemListEnd
-
-    \CVSubheading
-      {Mobile Software Developer}{Sep. 2021 -- Present}
-      {Yandex}{Saint-Petersburg, Russia}
-    \CVItemListStart
-      \CVItem{Development of the Yandex.Q mobile application on Flutter}
-      \CVItem{Implemented performance tracking in release mode}
-      \CVItem{Implemented a dark theme}
-    \CVItemListEnd
-
-    \CVSubheading
-      {Software C++ Engineer Intern}{July 2020 -- Aug. 2020}
-      {Intel Corporation}{Nizhny Novgorod, Russia}
-    \CVItemListStart
-      \CVItem{Developed a smart pointer for persistent memory and a specialization for std::atomic}
-      \CVItem{Moved the used collections to use a smart pointer, gaining a performance increase of 10-20\%}
-      \CVItem{Specialization in working with persistent memory and libraries \href{https://github.com/pmem/libpmemobj-cpp}{\underline{libpmemobj-cpp}}, pmdk}
-    \CVItemListEnd
-
-    \CVSubheading
-      {Junior Software Developer}{Dec. 2019 -- June 2020}
-      {Singularis Lab LLC.}{Volgograd, Russia}
-    \CVItemListStart
-      \CVItem{Development and testing a Geometric 3D core for a CAD-systems}
-      \CVItem{CV/ML model for calculating the semantic proximity of images}
-    \CVItemListEnd
-  
-  \CVSubHeadingListEnd
-
-%-----PROJECTS AND RESEARCH----------------------------------------------------
-
-\section{Projects and Research}
-
- \CVSubHeadingListStart
-    \GithubProjectDescription
-      {Python, Pytorch, Dart, Flutter}{https://github.com/avdosev/watermarks_remover}{Web service for removing watermarks from images}
-    \GithubProjectDescription
-      {Dart, Flutter}{https://github.com/avdosev/habr_app}{Habr App. Supports advanced caching and visual customization}
-    \GithubProjectDescription
-      {Node.js, TypeScript, React}{https://github.com/avdosev/metida}{Team project. Supported article and comments creation}
-  \CVSubHeadingListEnd
-
-
-
-%-----CONFERENCES AND PRESENTATIONS--------------------------------------------
-
-\section{Conferences and Presentations}
-  \CVSubHeadingListStart
-    \CVSubheading
-      {Winter school URFU "Software engineering and radio engieering"}{February 2020}
-      {During the five days of school, I’m learned how improve the soft-skills. }{Sochi, Russia}
-    \CVSubheading
-      { Project "Campus" SKB KONTUR }{Fall 2019}
-      { As part of a four-day field school, he learned the basics of designing in C\#, \\
-      got the skills in using Git, DI containers and the skills in writing clean code. }{ Yekaterinburg, Russia }
-  \CVSubHeadingListEnd
-
-%-----HONORS AND AWARDS--------------------------------------------------------
-\section{Honors and Awards}
-  \CVSubHeadingListStart
-%    \CVSubheading %Example
-%      {What}{When}
-%      {Short Description}{}
-    \CVSubheading
-      {Winner of the Olympiad "I am a Professional" in the direction of "Artificial Intelligence"}{Spring 2021}
-      {}{Moscow, Russia}
-    \CVSubheading
-      {Winner of the Olympiad "I am a Professional" in the direction of "Machine Learning"}{Spring 2021}
-      {}{Moscow, Russia}
-  \CVSubHeadingListEnd
-
-%-----SKILLS-------------------------------------------------------------------
+%--------------SKILLS------------------------
+% Add or remove resumeSectionTypes according to your needs
 
 \section{Skills}
- \begin{itemize}[leftmargin=0.5cm, label={}]
-    \small{\item{
-     \textbf{Languages}{: English (A2), Russian (Native) } \\
-     \textbf{Programming}{: C++, Python, Dart, TypeScript } \\
-     \textbf{Machine Learning}{: Tensorflow, Keras } \\
-     \textbf{Mobile}{: Flutter, Dart } \\
-     \textbf{Technologies}{: Git, SQL, MongoDB } \\
-    }}
- \end{itemize}
-    
-%------------------------------------------------------------------------------
+  \resumeHeadingListStart{}
+    \resumeSectionType{Prog. Languages}{}{Rust, C++, Go, Python}
+    \resumeSectionType{Rust}{}{Actix, Tokio, Hyper}
+    \resumeSectionType{C++/17}{}{STL, Qt, CMake}
+    \resumeSectionType{Go}{}{Gin, Bun}
+    \resumeSectionType{Python/ML}{}{PyTorch, NLTK, NumPy, scikit-learn}
+    \resumeSectionType{Databases}{}{PostgreSQL, T-SQL, MongoDB}
+    \resumeSectionType{Technologies}{}{Git, Docker, Elasticsearch, Linux}
+    \resumeSectionType{Languages}{}{Russian (native), English (B1)}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------PROJECTS--------------------------
+% Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
+
+% \section{Projects}
+% \resumeHeadingListStart{}
+%     \resumeTrioHeading{\href{https://project1.com}{\uline{Project 1}}}{React.js, Redux, PHP, MySQL Git}{\href{https://proect1.com/source-code/}{\uline{Source Code}}}
+%     \resumeItemListStart{}
+%         \resumeItem{Designed and developed a clean and modern website using \textbf{HTML, CSS, and JavaScript}}
+%         \resumeItem{Optimized website for \textbf{speed and user experience}}
+%         \resumeItem{Utilized \textbf{responsive design} to ensure compatibility across all devices}
+%         \resumeItem{Deployed on GitHub pages via GitHub Actions}
+%     \resumeItemListEnd{}
+% \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%----------------OTHERS----------------------
+% You can add your acheivements, accolades, certifications etc. here.
+
+\section{Conferences}
+\resumeItemListStart{}
+    \resumeItem{\textbf{Project Svobodny}: Presented a utility for measuring the computational complexity of programs}
+\resumeItemListEnd{}
+%--------------------------------------------
+
+
+%----------------OTHERS----------------------
+% You can add your acheivements, accolades, certifications etc. here.
+
+% \section{Certifications}
+%   \resumeItemListStart{}
+%     \resumeItem{\href{https://dummy-certification.com}{\uline{Certified Web Developer by the W3C}}}
+% \resumeItemListEnd{}
+%--------------------------------------------
+
 \end{document}
