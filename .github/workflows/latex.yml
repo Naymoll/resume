@@ -6,10 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # Необходимо использовать этот action, чтобы получить содержимое репо
-    - uses: actions/checkout@v2
+    - name: Set up Git repository
+      uses: actions/checkout@v4
     # Компилируем документ
     - name: Build document
-      uses: xu-cheng/latex-action@v2
+      uses: xu-cheng/latex-action@v3
       with:
         # Переименуйте, если у вас другой файл
         root_file: main.tex
@@ -21,7 +22,7 @@ jobs:
         compiler: latexmk
     # Загружаем собранные pdf-файлы
     - name: Upload pdf document
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         # Это значение используется как ключ в хранилище
         name: my_doc
@@ -44,7 +45,7 @@ jobs:
           echo "::set-output name=date::$(date +'%Y-%m-%d')"
           echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           # Тот самый ключ, который мы указывали в upload-artifact
           name: my_doc
@@ -56,8 +57,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
         with:
           # Берем результат из step с id=vars (см. выше). 
-          # Получим теги вида “my_doc-<дата билда>-<первые 8 символов из sha коммита>
-          tag_name: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          # Получим теги вида “resume-<дата билда>-<первые 8 символов из sha коммита>
+          tag_name: resume-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
           # Имя, которое будет высвечиваться в релизе
           release_name: My Actions document (version ${{ steps.vars.outputs.date }})
           # Наш релиз не набросок и не пререлиз, так что оба в false

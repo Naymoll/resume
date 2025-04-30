@@ -35,6 +35,7 @@
 \usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
 
 \usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+\usepackage{graphicx}
 %-----------------------------------------
 
 \input glyphtounicode % converts glyph names to unicode
@@ -162,22 +163,13 @@
 % Make sure all the details are correct, you can add more links in the first row of second column if needed
 
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{\Huge Sokolov Maksim \vspace{2pt}} & % row = 1, col = 1
-  Location: Saint-Petersburg, Russia \\ % row = 1, col = 2
-  \href{https://vk.com/naymoll}{\uline{VK}} $|$ % row = 2, col = 1
-  \href{https://t.me/real_naymoll}{\uline{Telegram}} $|$ % row = 2, col = 1
-  \href{https://github.com/Naymoll}{\uline{GitHub}} & % row = 2, col = 1
-  Email: \href{mailto:naymoll@yandex.ru}{\uline{naymoll@yandex.ru}} $|$ % row = 2, col = 2
-  Mobile: +7 (923) 314-02-80 \\ % row = 2, col = 2
+  \textbf{\Huge Maksim Sokolov \vspace{2pt}} & % row = 1, col = 1
+  Saint-Petersburg, Russia \\ % row = 1, col = 2
+  \href{https://t.me/real_naymoll}{\includegraphics[width=18pt]{telegram-mark.png}} % row = 2, col = 1
+  \href{https://github.com/Naymoll}{\includegraphics[width=18pt]{github-mark.png}} & % row = 2, col = 2
+  \href{mailto:naymoll@yandex.ru}{\uline{naymoll@yandex.ru}} $|$ % row = 2, col = 3
+  +7 (923) 314-02-80 \\ % row = 2, col = 4
 \end{tabular*}
-%--------------------------------------------
-
-
-%-----------SUMMARY--------------------------
-% Keep this short, simple and straigth to point
-
-\section{About Me}
-\small{I'm a backend developer with good computer science skills. I have hands-on experience building reliable services and a passion for working at the intersection of backend development and machine learning}
 %--------------------------------------------
 
 
@@ -186,23 +178,25 @@
 
 \section{Experience}
 \resumeHeadingListStart{}
-    \resumeQuadHeading{Go Developer}{February 2023 -- Present}
+    \resumeQuadHeading{Rust Developer}{August 2023 -- Present}
+    {T-Bank}{Saint-Petersburg}
+
+    \resumeQuadHeading{Go Developer}{February 2023 -- August 2023}
     {Solution Factory}{Remote}
     \resumeItemListStart{}
-        \resumeItem{Development and maintaining of a sales system for standalone vending machines}
-        \resumeItem{Developed a user verification library via cell phone}
-        \resumeItem{Created a service for management of sales documents}
-        \resumeItem{Designed and implemented a Server-Driven UI service based on DivKit}
-        \resumeItem{Optimizing a sales system for standalone vending machines}
+        \resumeItem{Designed and implemented a Server-Driven UI service using DivKit}
+        \resumeItem{Created a service for managing sales documents}  
+        \resumeItem{Developed and maintained a sales system for standalone vending machines, optimizing performance}  
+        \resumeItem{Built a user verification library via cell phone authentication}  
     \resumeItemListEnd{}
 
-    \resumeQuadHeading{Rust Developer}{August 2021 -- November 2022}
+    \resumeQuadHeading{Junior Rust Developer}{August 2021 -- November 2022}
     {Atlas Delivery}{Remote}
     \resumeItemListStart{}
-        \resumeItem{Developed and maintained of vehicle routing problem solving service}
-        \resumeItem{Designed and developed a utility to collect public transportation information from Open Street Map}
-        \resumeItem{Developed a Rust library based on top of the C++ OSRM library}
-        \resumeItem{Optimized microservices performance with PGO}
+        \resumeItem{Developed and maintained a service for solving vehicle routing problems}  
+        \resumeItem{Designed and built a tool to extract public transportation data from OpenStreetMap}  
+        \resumeItem{Developed a Rust library leveraging the C++ OSRM library for routing}  
+        \resumeItem{Optimized microservices performance using Profile-Guided Optimization (PGO)}
     \resumeItemListEnd{}
 \resumeHeadingListEnd{}
 %---------------------------------------------
@@ -213,11 +207,14 @@
 
 \section{Education}
   \resumeHeadingListStart{}
-    \resumeQuadHeading{ITMO University}{Saint Petersburg, Russia}
-    {Master of Software Engieering}{September 2021 -- June 2023}
+    \resumeQuadHeading{ITMO University}{Saint-Petersburg, Russia}
+    {PhD in Engineering}{2024 -- Present}
+    
+    \resumeQuadHeading{ITMO University}{Saint-Petersburg, Russia}
+    {Master's degree in Software Engineering}{2021 -- 2023}
 
     \resumeQuadHeading{Siberian Federal University}{Krasnoyarsk, Russia}
-    {Bachelor of Computer Science}{September 2017 -- June 2021}
+    {Bachelor's degree in Computer Science}{2017 -- 2021}
   \resumeHeadingListEnd{}
 %---------------------------------------------
 
@@ -227,13 +224,14 @@
 
 \section{Skills}
   \resumeHeadingListStart{}
+    % \resumeSectionType{Prog. Languages}{}{Rust, C++, Go, Python}
     \resumeSectionType{Prog. Languages}{}{Rust, C++, Go, Python}
-    \resumeSectionType{Rust}{}{Actix, Tokio, Hyper}
-    \resumeSectionType{C++/17}{}{STL, Qt, CMake}
+    \resumeSectionType{Rust}{}{Axum, Actix Web, Tokio, Hyper}
     \resumeSectionType{Go}{}{Gin, Bun}
-    \resumeSectionType{Python/ML}{}{PyTorch, NLTK, NumPy, scikit-learn}
+    \resumeSectionType{C++}{}{STL, Qt, CMake}
+    % \resumeSectionType{Python/ML}{}{PyTorch, NLTK, NumPy, scikit-learn}
     \resumeSectionType{Databases}{}{PostgreSQL, T-SQL, MongoDB}
-    \resumeSectionType{Technologies}{}{Git, Docker, Elasticsearch, Linux}
+    \resumeSectionType{Technologies}{}{Git, Docker, Kafka, Prometheus, Elasticsearch, Linux}
     \resumeSectionType{Languages}{}{Russian (native), English (B1)}
   \resumeHeadingListEnd{}
 %--------------------------------------------
@@ -258,10 +256,16 @@
 %----------------OTHERS----------------------
 % You can add your acheivements, accolades, certifications etc. here.
 
-\section{Conferences}
+% \section{Conferences}
+% \resumeItemListStart{}
+%     \resumeItem{\textbf{Project Svobodny}: Presented a utility for measuring the computational complexity of programs}
+% \resumeItemListEnd{}
+
+\section{Publications}
 \resumeItemListStart{}
-    \resumeItem{\textbf{Project Svobodny}: Presented a utility for measuring the computational complexity of programs}
+    \resumeItem{Dubovskoi, A. A., Baimuratov, I. R., \& Sokolov, M. V. (2024). Informed Object Detection for Computer Games. Pattern Recognition and Image Analysis, 34(3), 810-818.}
 \resumeItemListEnd{}
+
 %--------------------------------------------
 
 
